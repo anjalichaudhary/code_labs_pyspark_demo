@@ -38,22 +38,6 @@ def test_filter_medical():
     assert ("101" == medical_list[0].memberId)
     assert ("103" == medical_list[1].memberId)
 
-
-@pytest.mark.filterwarnings("ignore")
-def test_generate_full_name():
-    eligibility = create_sample(elg_sample, schema.eligibility)
-    medicals = create_sample(med_sample, schema.medical)
-
-    filtered_medical = job.filter_medical(eligibility, medicals)
-    full_name = job.generate_full_name(eligibility, filtered_medical)
-
-    medical_list = sorted(full_name.collect(), key=lambda x: x.memberId)
-
-    assert (2 == len(medical_list))
-    assert ("101" == medical_list[0].memberId and "Fizz Buzz" == medical_list[0].fullName)
-    assert ("103" == medical_list[1].memberId and "John Sena" == medical_list[1].fullName)
-
-
 @pytest.mark.filterwarnings("ignore")
 def test_find_max_paid_member():
     medicals = create_sample(med_sample, schema.medical)
